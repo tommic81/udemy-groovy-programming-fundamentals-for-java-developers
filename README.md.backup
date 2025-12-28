@@ -3,7 +3,7 @@
 ## Setup
 - On Windows dowload [Groovy](https://groovy.apache.org/download.html).
 - On Linux use SDKman
-- Groovy Console : `groovyconsole`
+- GroovyConsole : `groovycon`
 
 ## Groovy operators
 ### Null-Safe Operator
