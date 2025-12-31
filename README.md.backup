@@ -3,7 +3,7 @@
 ## Setup
 - On Windows dowload [Groovy](https://groovy.apache.org/download.html).
 - On Linux use SDKman
-- GroovyConsole : `groovycon`
+- Groovy Console : `groovyconsole`
 
 ## Groovy operators
 ### Null-Safe Operator
@@ -93,10 +93,12 @@ def driveThruOrder = [
 driveThruOrder.sort{a , b -> a.cost <=> b.cost}
 ```
 ### Spread Operator
+- Example 1
 
 ```
 def fruits = ['apples', 'oranges', 'pears']
 
+//*fruits inserts all fruits elements
 def shoppingList = ['milk', 'cereal', *fruits]
 ```
 - Example 2
@@ -128,6 +130,7 @@ def fruits = ['apples', 'oranges']
 fruits*.toUpperCase()
 ```
 ### Range Operator
+- Like a list
 ```
 (1..5)[1]
 
@@ -151,6 +154,12 @@ enum Weekdays {
 def name = 'Matt'
 def s = "How are you, $name?"
 ```
+- Double quotas are used with the interpolation
+```
+def name = 'Matt'
+def s = "How are you, $name?"
+println 'String is: ' + s
+```
 ### Heredocs
 ```
 def name = 'Alex'
@@ -170,7 +179,7 @@ println emailText
 ```
 ### Pattern Operator in Regular Expression
 ```
-def re = ~'s.*' 
+def re = ~'S.*' //Sugar, Sweet, Syrop 
 
 def matcher = re.matcher('Sweet')
 
@@ -183,12 +192,14 @@ def re = ~/s.*/
 ```
 ### Find Operator
 ```
+//=~ find operator
 ('Sugar' =~ /s.*/).matches()
 
 ```
 ### Match Operator
 - Executes matches() 
 ```
+//==~ match operator
 def matches = 'Sugar' ==~ /S.x/
 ```
 ### Capture groups
@@ -198,6 +209,8 @@ def s = 'Friday is my favourite  day!'
 def dayOfWeek = (s =~ /(.*) is my favourite  day/)[0][1]
 
 println 'Day of week: ' + dayOfWeek
+//result Day of week: Friday
+
 ```
 - Example 2
 ```
@@ -209,6 +222,10 @@ def whoseDay = captures[2]
 
 println 'Day of week: ' + dayOfWeek
 println 'Whose day: ' + whoseDay
+//results: 
+//Day of week: Monday
+//Whose day: my
+
 ```
 - Example 3
 ```
