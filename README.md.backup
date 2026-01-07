@@ -236,12 +236,13 @@ def dayOfWeek = captures[1]
 def whoseDay = captures[2]
 
 println "$whoseDay best day of the week is $dayOfWeek"
+//results: Matt's best day of the week is Monday
 
 ```
 ## Collections in Groovy
 ### Creating Lists and Sets
 ```
-def l = [1, 3, 5, 7]
+def l = [1, 3, 5, 7] // ArrayList by default
 
 --
 def l = [1, 3, 5, 7] as LinkedList
@@ -368,7 +369,7 @@ def namesAndAges = [
     new Person(name: 'Simon', age: 45),
     new Person(name: 'Suzie', age: 32)
 ]
-namesAndAges.find { it.age < 48 }.name
+namesAndAges.find { it.age < 48 }.name //returns first element matching
 ```
 ### Testing Elements in Collections
 - Checks if every element meets the condition
@@ -383,7 +384,7 @@ def namesAndAges = [
     new Person(name: 'Simon', age: 45),
     new Person(name: 'Suzie', age: 32)
 ]
-namesAndAges.every { it.age < 48 }
+namesAndAges.every { it.age < 48 } //true/false
 ```
 - Checks if any element meets the condition
 ```
@@ -397,7 +398,7 @@ def namesAndAges = [
     new Person(name: 'Simon', age: 45),
     new Person(name: 'Suzie', age: 32)
 ]
-namesAndAges.any { it.age < 48 }
+namesAndAges.any { it.age < 48 } //true/false
 ```
 ### Collecting elements to a list
 ```
@@ -437,6 +438,7 @@ l.collect { [ (it.age) :  it.name.toUpperCase() ] }
 ### Creating Aggregate Functions with Inject
 - min, max, sum
 ```
+//inject() - injects a new element
 def l = [1, 2, 3, 4, 5]
 l.inject(0) { sum, e -> 
     sum + e
