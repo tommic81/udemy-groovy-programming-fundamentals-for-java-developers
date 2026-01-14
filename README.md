@@ -533,3 +533,156 @@ public static void main(String[] args){
     println(e.reportForWork())
 }
 ```
+### Overriding methods in Groovy
+```
+class Person {
+    String name
+    
+    Person(name) {
+        this.name = name
+    }
+    
+    def greet() {
+        println "Hello, I'm $name!"
+    }
+}
+class Employee extends Person {
+    int salary
+    
+    Employee(String name, int salary){
+        super(name)
+        this.salary = salary
+    }
+    
+    def reportForWork(){
+        "Here sir, ready and willing for the long day ahead!"
+    }
+      def greet() {
+        println "Hello, I'm $name, I earn $salary"
+    }
+}
+
+public static void main(String[] args){
+    Employee e = new Employee('Matt', 25000)
+    e.greet()
+    println(e.reportForWork())
+}
+```
+
+### POGOs and Groovy Property Generation
+- Groovy will generate a proper java POJO with `private` class members
+```
+class Person {
+    String name
+    
+}
+```
+### Operator Overloading
+- [Operator-Overloading](https://groovy-lang.org/operators.html#Operator-Overloading)
+
+```
+class Greeting {
+    String message
+}
+
+Greeting g = new  Greeting(message: 'Hello')
+
++g
+
+
+---
+Exception thrown
+
+groovy.lang.MissingMethodException: No signature of method: positive for class: Greeting is applicable for argument types: () values: []
+Possible solutions: notify()
+
+	at ConsoleScript5.run(ConsoleScript5:7)
+```
+- Fixed with the overloading
+```
+@groovy.transform.ToString
+class Greeting {
+    String message
+    
+    Greeting positive(){
+        return new Greeting(message: this.message.toUpperCase())
+    }
+}
+
+Greeting g = new  Greeting(message: 'Hello')
+
++g
+```
+### String Equality in Groovy
+- No need to use `equals()`
+```
+String s1 = 'Hello'
+String s2 = 'Hello'
+
+s1 == s2
+```
+### Returning Multiple Values from a Method
+- Java style
+```
+@groovy.transform.ToString(includeNames = true)
+class BoxDimensions {
+    int x, y, z
+}
+
+static BoxDimensions calculate(){
+    new BoxDimensions(x: 10, y: 12, z: 30)
+}
+
+public static void main(String[] atgs){
+    BoxDimensions dimensions = calculate()
+    
+    // calculation 1
+    int area = dimensions.x * dimensions.y
+}
+```
+- Groovy style
+```
+static def calculate(){
+   [10, 12, 30]
+}
+
+public static void main(String[] atgs){
+    def (x, y, z) = calculate()
+    
+    // calculation 1
+    int area = x * y
+}
+```
+### Autogenerating Equals and HashCode with Groovy AST Transformations
+```
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString
+@EqualsAndHashCode
+class Person {
+    String name
+    int age
+}
+
+public static void main(String[] atgs){
+   new Person()
+}
+```
+### Named Constructors
+```
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString
+@EqualsAndHashCode
+class Person {
+    String name
+    int age
+}
+
+public static void main(String[] args){
+	//instead of writing a constructor we name the arguments
+   new Person(name: "Daisy", age: 5)
+}
+```
